@@ -1,0 +1,54 @@
+<tr>
+	<td>{{ lastname }}, {{ firstname }}</td>
+	<td class="right-align">
+		<button
+			type="button"
+			id="trigger-edit-moderator-modal"
+			class="edit fa-button"
+			aria-label="trigger-edit-moderator-modal"
+			data-bs-toggle="modal"
+			data-bs-target="#edit-moderator-modal"
+			data-phonenum="{{phonenum}}"
+			data-lastname="{{ lastname}}"
+			data-firstname="{{firstname}}"
+			data-password="{{password}} "
+		>
+			<i class="fa-solid fa-pencil"></i>
+		</button>
+		
+		<button
+			type="button"
+			class="delete fa-button"
+			aria-label="delete-button"
+			data-id = {{phonenum}}
+		>
+			<i class="fa-solid fa-trash"></i>
+		</button>
+        
+	</td>
+</tr>
+
+{{!-- <tr>
+	<td>{{ lastname }}, {{ firstname }}</td>
+	<td class="right-align">
+		<button
+			type="button"
+			class="delete fa-button"
+			aria-label="delete-button"
+			data-id = {{ phonenum }}
+		>
+			<i class="fa-solid fa-trash"></i>
+		</button>
+        <button
+			type="button"
+			id="trigger-edit-modal"
+			class="fa-button"
+			aria-label="trigger-edit-modal"
+			data-bs-toggle="modal"
+			data-bs-target="#edit-modal"
+			data-id = {{ phonenum }}
+		>
+			 <i class="fa-solid fa-pencil"></i>
+		</button>
+	</td>
+</tr> --}}

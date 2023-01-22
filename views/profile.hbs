@@ -1,0 +1,191 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <!-- Bootstrap CDN -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+            crossorigin="anonymous"
+        />
+        <!-- Font Awesome CDN -->
+        <script
+            src="https://kit.fontawesome.com/eb29fe9d41.js"
+            crossorigin="anonymous"
+        ></script>
+
+        <!-- jQuery CDN  -->
+        <script
+            src="https://code.jquery.com/jquery-3.6.1.js"
+            integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+            crossorigin="anonymous"
+        ></script>
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="/css/style.css" />
+        <link rel="stylesheet" href="/css/profile.css" />
+
+        <script type="text/javascript" src="/js/profile.js"></script>
+
+        <title>UCCA</title>
+    </head>
+
+    <body>
+        <div class="container-fluid">
+            {{> editChurchgoerModal lastname=lastname firstname=firstname baptism=baptism phonenum=phonenum birthdate=birthdate gender=gender address=address status=status baptismdate=baptismdate baptismlocation=baptismlocation}}
+
+            <div>
+                {{!-- Navigation Bar --}}
+                {{> navbar}}
+            </div>
+
+            <div class="content">
+                <div class="row mb-4">
+                    <div class="col">
+                        <p class="fs-5">Members / <a href="/loadMembers">Churchgoers</a> / {{ lastname }}</p>
+                    </div>
+
+                    <div class="col">
+                        <p class="text-end">{{ date }}</p>
+                    </div>
+                </div>
+                {{!-- {{> breadcrumbs navigation="<p class=\"fs-5\">Members / <a href=\"/loadMembers\">Churchgoers</a> / {{ test1 }} , {{ test2 }} </p>" test1=lastname test2=firstname}} --}}
+                
+                <div>
+                    <h1><span class="bold">{{ lastname }}</span>, {{ firstname }}</h1>
+                    <p class="baptism" id="{{ baptstatid }}"> {{ baptism }}</p>
+                </div>
+                <div class="d-flex flex-column">
+                    <div class="d-flex padding-bot-0">
+                        <div>
+                            <p id="details">Personal Details</p>
+                        </div>
+                        <div>
+                            <button
+                                type="button"
+                                id="trigger-edit-churchgoer-modal"
+                                class="fa-button"
+                                aria-label="trigger-edit-churchgoer-modal"
+                                data-bs-toggle="modal"
+			                    data-bs-target="#edit-churchgoer-modal"
+			                    data-id = {{ phonenum }}>
+                                <i class="fa-solid fa-pencil"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="d-flex">
+                        <div class="section">
+                            <p class="sub-header">
+                                {{!-- <i class="fa-solid fa-user fa-color"></i>  --}}
+                                BASIC INFORMATION
+                            </p>
+                            {{!-- <hr class="sub-hr"> --}}
+
+                            <table class="table table-borderless table-sm">
+                                <tbody>
+                                    <tr>
+                                        <td>Phone Number</td>
+                                        <th scope="row" id="phonenum-display">{{phonenum}}</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Birthday</td>
+                                        <th scope="row"> {{birthdate}} </th>
+                                    </tr>
+                                    <tr>
+                                        <td>Gender</td>
+                                        <th scope="row"> {{ gender }} </th>
+                                    </tr>
+                                    <tr>
+                                        <td>Address</td>
+                                        <th scope="row"> {{ address }} </th>
+                                    </tr>
+                                    <tr>
+                                        <td>Status</td>
+                                        <th scope="row"> {{ status }} </th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="section">
+                            <p class="sub-header">
+                                {{!-- <i class="fa-solid fa-church fa-color"></i>  --}}
+                                BAPTISMAL INFORMATION
+                            </p>
+                            {{!-- <hr class="sub-hr"> --}}
+
+                            <table class="table table-borderless table-sm">
+                                <tbody>
+                                    <tr {{bapthidden}}>
+                                        <td>Baptism Date</td>
+                                        <th scope="row"> {{ baptismdate }} </th>
+                                    </tr>
+                                    <tr {{bapthidden}}>
+                                        <td>Baptism Location</td>
+                                        <th scope="row"> {{ baptismlocation }} </th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    {{!-- <div class="flex-grow-1" id="w50">
+                        <table class="table table-borderless table-sm">
+                            <tbody>
+                                <tr>
+                                    <td>Phone Number</td>
+                                    <th scope="row" id="phonenum-display">{{phonenum}}</th>
+                                </tr>
+                                <tr>
+                                    <td>Birthday</td>
+                                    <th scope="row"> {{birthdate}} </th>
+                                </tr>
+                                <tr>
+                                    <td>Gender</td>
+                                    <th scope="row"> {{ gender }} </th>
+                                </tr>
+                                <tr>
+                                    <td>Address</td>
+                                    <th scope="row"> {{ address }} </th>
+                                </tr>
+                                <tr>
+                                    <td>Status</td>
+                                    <th scope="row"> {{ status }} </th>
+                                </tr>
+                                <tr {{bapthidden}}>
+                                    <td>Baptism Date</td>
+                                    <th scope="row"> {{ baptismdate }} </th>
+                                </tr>
+                                <tr {{bapthidden}}>
+                                    <td>Baptism Location</td>
+                                    <th scope="row"> {{ baptismlocation }} </th>
+                                </tr>                               
+                            </tbody>
+                        </table>
+                    </div> --}}
+
+                    <div>
+                        <button
+                            type="button"
+                            id="delete-member">
+                            Delete Member
+                        </button>
+                        {{!-- <p id="delete-member">Delete Member</p> --}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- JavaScript -->
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"
+        ></script>
+    </body>
+</html>

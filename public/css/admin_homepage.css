@@ -1,0 +1,12 @@
+#trigger-delete-modal {
+    border: none;
+    background-color: transparent;
+}
+
+a {
+    color: black;
+}
+
+a:hover {
+    color: rgb(63, 63, 63);
+}

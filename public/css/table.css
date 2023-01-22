@@ -1,0 +1,111 @@
+.fa-button {
+    border: none;
+    background-color: transparent;
+}
+
+#space {
+    padding-right: 1%;
+}
+
+.right-align {
+    text-align: right;
+}
+
+.margin-below {
+    margin-bottom: 0.5%;
+}
+
+.repository {
+    width: 70%;
+    margin: auto;
+}
+
+#search {
+    width: 40%;
+    /* margin-bottom: 3%; */
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+#sort-group {
+    height: 10px;
+}
+
+.dropdown-btn {
+    background-color: transparent;
+    border: none;
+    font-weight: bold;
+}
+
+.dropdown-option {
+    margin: 0 0 10px 7px;
+}
+
+.dropdown-option-last {
+    margin: 0 0 0 7px;
+}
+
+.category[id='Unbaptized'], .category[id='Unbaptized']:hover {
+    width: fit-content;
+    padding: 1px 10px 1px 10px;
+    border-radius: 5px;
+    background-color: rgba(227, 226, 224, 0.5);
+    color: rgb(50, 48, 44);
+}
+
+.category[id='Infant Baptism'], .category[id='Infant Baptism']:hover {
+    width: fit-content;
+    padding: 1px 10px 1px 10px;
+    border-radius: 5px;
+    background-color: rgb(219, 237, 219);
+    color: rgb(28, 56, 41);
+}
+
+.category[id='Water Baptism'], .category[id='Water Baptism']:hover {
+    width: fit-content;
+    padding: 1px 10px 1px 10px;
+    border-radius: 5px;
+    background-color: rgb(211, 229, 239);
+    color: rgb(24, 51, 71);
+}
+
+.session-type[id='MorningSession'], .session-type[id='MorningSession']:hover {
+    width: fit-content;
+    padding: 1px 10px 1px 10px;
+    border-radius: 5px;
+    background: rgb(253, 236, 200);
+    color: rgb(64, 44, 27);
+}
+.session-type[id='AfternoonSession'], .session-type[id='AfternoonSession']:hover {
+    width: fit-content;
+    padding: 1px 10px 1px 10px;
+    border-radius: 5px;
+    background: rgb(255, 226, 221);
+    color: rgb(93, 23, 21);
+}
+.session-type[id='LifeJourney'], .session-type[id='LifeJourney']:hover {
+    width: fit-content;
+    padding: 1px 10px 1px 10px;
+    border-radius: 5px;
+    background: #2C3849;
+    color: #e1f3ff;
+}
+
+.page-link {
+    color: black;
+}
+
+.page-link:hover {
+    color: black;
+}
+
+.pagination {
+    margin-top: 5%;
+}
+
+.page-item.active>.page-link {
+    background-color: #7f62a7;
+    border-color: #7f62a7;
+}

@@ -1,0 +1,93 @@
+.padding-bot-0 {
+    /* margin-top: 1%; */
+    margin-bottom: 0.5%;
+}
+
+h1 {
+    font-size: 54px;
+    margin-bottom: 0;
+}
+
+hr {
+    margin-top: 0;
+    margin-bottom: 20px;
+    /* padding-top: 0; */
+}
+
+.baptism#ub {
+    width: fit-content;
+    padding: 1px 10px 1px 10px;
+    border-radius: 5px;
+    font-size: 23px;
+    font-weight: bolder;
+    background-color: rgba(227, 226, 224, 0.5);
+    color: rgb(50, 48, 44);
+}
+
+.baptism#ib {
+    width: fit-content;
+    padding: 1px 10px 1px 10px;
+    border-radius: 5px;
+    font-size: 23px;
+    font-weight: bolder;
+    background-color: rgb(219, 237, 219);
+    color: rgb(28, 56, 41);
+}
+
+.baptism#wb {
+    width: fit-content;
+    padding: 1px 10px 1px 10px;
+    border-radius: 5px;
+    font-size: 23px;
+    font-weight: bolder;
+    background-color: rgb(211, 229, 239);
+    color: rgb(24, 51, 71);
+}
+
+#details {
+    font-size: 20px;
+    margin-bottom: 0;
+}
+
+.section {
+    width: 45%;
+    margin-right: 5%;
+}
+
+.sub-header {
+    margin-bottom: 8px;
+    font-size: 11px;
+    font-weight: bolder;
+    color: rgb(157, 157, 157);
+}
+
+.sub-hr {
+    margin-top: 0;
+}
+
+.row {
+    margin-bottom: 1em;
+}
+
+input {
+    height: fit-content;
+}
+
+.form-text {
+    color: red;
+    /* display: none; */
+}
+
+hr {
+    width: 100%;
+}
+
+#w50 {
+    width: 50%;
+}
+
+#delete-member {
+    border: none;
+    color: red;
+    background-color: transparent;
+}

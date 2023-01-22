@@ -1,0 +1,18 @@
+#errorText {
+    color: red;
+}
+
+/* .breadcrumbs {
+    margin-bottom: 3%;
+} */
+
+.btn, .btn:hover {
+    background-color: #7f62a7;
+    border-color: #7f62a7;
+    color: white;
+}
+
+.btn:active {
+    background-color: #764fad;
+    border-color: #764fad;
+}

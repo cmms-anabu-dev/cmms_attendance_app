@@ -1,0 +1,66 @@
+.container {
+    height: 100vh;
+    width: 100vw;
+    margin-left: 0;
+    padding-left: 0;
+}
+
+body {
+    background-image: url("../images/background-test3.png");
+    background-size: cover;
+}
+
+.login-form {
+    min-width: 30vw;
+    height: 70vh;
+    overflow: hidden;
+    background-color: white;
+    padding: 5% 3% 5% 3%;
+    margin-left: 10%;
+    border-radius: 10px;
+}
+
+form {
+    height: 80%;
+}
+
+h1 {
+    text-align: center;
+    color: black;
+    font-size: 30px;
+    margin-bottom: 7%;
+}
+
+label {
+    color: black;
+}
+
+.btn {
+    background-color: #3E3E32;
+    width: 100%;
+    color: white;
+}
+
+.row {
+    margin-bottom: 1rem;
+}
+
+/* @media only screen and (min-width: 768px) {
+    .login-form {
+        min-width: 30vw;
+        height: 70vh;
+        margin-left: 10%;
+    }
+} */
+
+@media only screen and (min-width: 1400px) {
+    .login-form {
+        min-width: 27vw;
+        height: 50vh;
+        margin-left: 15%;
+    }
+
+    #login {
+        padding: 5%;
+    }
+}

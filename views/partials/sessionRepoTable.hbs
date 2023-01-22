@@ -1,0 +1,21 @@
+<tr>
+    <td>
+        <a href="/sessionAttendance?date={{ ymddate }}&session={{ session }}"
+            >{{ ymddate }}</a
+        >
+    </td>
+    <td>
+        <div class="session-type" id="{{session}}">{{ session }}</div>
+    </td>
+    <td class="right-align">
+        <button
+            type="button"
+			class="delete fa-button"
+			aria-label="delete-button"
+            data-date = {{ ymddate }}
+            data-session = {{ session }}
+        >
+            <i class="fa-solid fa-trash"></i>
+        </button>
+    </td>
+</tr>

@@ -1,0 +1,93 @@
+<div class="modal fade" id="edit-churchgoer-modal" tabindex="-1" aria-labelledby="edit-churchgoer-modal" aria-hidden="true">
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit {{firstname}} {{lastname}}'s Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="row">
+            <div class="col">
+                <label for="first-name" class="form-label">First Name</label>
+                <input class="form-control form-control-sm" id="firstname" value="{{firstname}}">
+                <div id="first-name-error" class="form-text" hidden>Names cannot have numbers</div>
+            </div>
+
+            <div class="col">
+                <label for="last-name" class="form-label">Last Name</label>
+                <input class="form-control form-control-sm" id="lastname" value="{{lastname}}">
+                <div id="last-name-error" class="form-text" hidden>Names cannot have numbers</div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+                <label for="phone-num" class="form-label">Phone Number</label>
+                <input class="form-control form-control-sm" id="phonenum" type="number" value="{{phonenum}}">
+                <div id="phone-num-error" class="form-text"></div>
+            </div>
+
+            <div class="col">
+                <label for="birthday" class="form-label">Birthday</label>
+                <input class="form-control form-control-sm" type="date" id="birthdate" value="{{birthdate}}">
+                <div id="birthday-error" class="form-text"></div>
+            </div>
+
+            <div class="col">
+                <label for="gender" class="form-label">Gender</label>
+                <select name="gender" class="form-select form-select-sm" id="gender">
+                    <option selected hidden value="{{gender}}">{{gender}}</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+            </div>
+          </div>
+
+          <div class="mb-3">
+              <label for="address" class="form-label">Address</label>
+              <input class="form-control form-control-sm" id="address" value="{{address}}">
+          </div>
+
+          <div class="row">
+            <div class="col">
+                <label for="baptismstatus" class="form-label">Baptism
+                    Status</label>
+                <select
+                    name="baptismstatus"
+                    class="form-select form-select-sm"
+                    id="baptism"
+                >
+                    <option selected hidden value="{{baptism}}">{{baptism}}</option>
+                    <option value="Unbaptized">Unbaptized</option>
+                    <option value="Infant Baptism">Infant Baptism</option>
+                    <option value="Water Baptism">Water Baptism</option>
+                </select>
+            </div>
+
+            <div class="col">
+                <label for="province" class="form-label" disabled="true">Baptismal Date</label>
+                <input
+                    type="date"
+                    class="form-control form-control-sm"
+                    id="baptismdate"
+                    value="{{baptismdate}}"
+                    {{baptdisabled}}
+                />
+                <div id="baptismdate-error" class="form-text"></div>
+            </div>
+          </div>
+
+          <div class="mb-3">
+              <label for="address" class="form-label">Baptism Location</label>
+              <input class="form-control form-control-sm" id="baptismlocation" value="{{baptismlocation}}" {{baptdisabled}}>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" id="update" data-phonenum="{{phonenum}}">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

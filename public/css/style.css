@@ -1,0 +1,101 @@
+body {
+    background-color: #F2F2F2;
+}
+
+.container-fluid {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+#logo {
+    width: 40px;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.h100-per {
+    height: 100%;
+}
+
+.content {
+    padding-left: 6%;
+    padding-right: 6%;
+    height: 100%;
+}
+
+nav {
+    padding-left: 4%;
+    padding-right: 4%;
+    background-color: #7f62a7;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
+    margin-bottom: 5vh;
+}
+
+.nav-link, .nav-link:hover {
+    color: white!important;
+}
+
+.dropdown-item, .dropdown-item:hover {
+    color: #7f62a7;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+a:hover {
+    color: black;
+    text-decoration: underline;
+}
+
+.fa-button {
+    border: none;
+    background-color: transparent;
+}
+
+/* removing arrows from input tags with type="number" */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+#mod_head {
+    background-color: #7f62a7;
+    border-radius: 3px 3px 0px 0px;
+}
+
+#mod_title {
+    color: white;
+}
+
+#mod_footer {
+    background-color: #F2F2F2;
+}
+
+.genReport {
+    border: #C0C0C0 1px solid;
+    border-radius: 3px 3px 0px 0px;
+    background-color: white;
+}
+
+.genReport:hover {
+    border: #C0C0C0 1px solid;
+    border-radius: 3px;
+    background-color: #7f62a7;
+    transition-duration: 0.5s;
+    color: white;
+}
+
+#exit_btn {
+    background-color: transparent;
+    color: #F0F0F0;
+    border: #C0C0C0 0px solid;
+}

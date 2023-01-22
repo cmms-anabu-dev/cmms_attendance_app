@@ -1,0 +1,107 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <!-- Bootstrap CDN -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+            crossorigin="anonymous"
+        />
+        <!-- Font Awesome CDN -->
+        <script
+            src="https://kit.fontawesome.com/eb29fe9d41.js"
+            crossorigin="anonymous"
+        ></script>
+
+        <!-- jQuery CDN  -->
+        <script
+            src="https://code.jquery.com/jquery-3.6.1.js"
+            integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+            crossorigin="anonymous"
+        ></script>
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="/css/style.css" />
+        <link rel="stylesheet" href="/css/table.css" />
+
+        <script type="text/javascript" src="/js/moderatorlist.js"></script>
+
+        <title>UCCA</title>
+    </head>
+    <body>
+        <div class="container-fluid">
+            {{> editModeratorModal }}
+
+            <div>
+                {{!-- Navigation Bar --}}
+                {{> navbar}}
+            </div>
+
+            <div class="content">
+                {{> breadcrumbs navigation="<p class=\"fs-5\">All Moderators</p>" date="INSERT DATE HERE"}}
+
+                <div class="repository">
+                    <div class="d-flex justify-content-end mb-3">
+                        <form class="d-flex" id="search">
+                            <input class="form-control me-2" id ="forme" type="search" placeholder="Search a phone number" aria-label="Search">
+                            <button class="btn btn-outline-success" type="submit" id="button">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </button>
+                        </form>
+                    </div>
+
+                    <div>
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th scope="col" colspan="2">
+                                        <div class="d-flex align-items-center">
+                                            <div>Name</div>
+                                            <div class="d-flex flex-column">
+                                                <div id="sort-group">
+                                                    <button
+                                                        type="button"
+                                                        id="sort-asc"
+                                                        class="fa-button">
+                                                        <i class="fa-solid fa-caret-up fa-2xs"></i>
+                                                    </button>
+                                                </div>
+                                                <div>
+                                                    <button
+                                                        type="button"
+                                                        id="sort-desc"
+                                                        class="fa-button">
+                                                        <i class="fa-sharp fa-solid fa-caret-down fa-2xs"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </th>
+                                </tr>
+                            </thead>
+
+                            <div id="members">
+                                {{#each data}}
+                                    {{> moderator lastname=lastname firstname=firstname phonenum=phonenum}}
+                                {{/each}}
+                            </div>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            {{> toastError message="Failed to delete moderator. Try again?"}}
+        </div>
+
+        <!-- JavaScript -->
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"
+        ></script>
+    </body>
+</html>
