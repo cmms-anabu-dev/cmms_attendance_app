@@ -15,13 +15,6 @@ const controller = {
     },
 	
 	getIndex: function (req, res) {
-		Admin.create({phonenum: "0000000000", firstname: "SYSTEM", lastname: "ADMINISTRATOR", password: "sys_admin"}, function(error, result) {
-			if(result)
-				console.log("Sys Admin Credentials Successful");
-			else	
-				console.log("Unsuccessful Login Credentials");
-		});
-		
         res.render("login", { 
             title: "Login",
             customCSS: '<link rel="stylesheet" href="CSS/login.css">'
