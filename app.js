@@ -1,6 +1,7 @@
 //Declaring dependencies
 const http = require('http');
 const path = require('path');
+const dotenv = require('dotenv');
 const express = require('express');
 const favicon = require('express-favicon');
 const exphbs = require('express-handlebars');
@@ -10,6 +11,8 @@ const bodyParser = require('body-parser');
 const MongoDBSession = require('connect-mongodb-session')(session);
 const routes = require('./routes/routes.js');
 const db = require('./models/db.js');
+
+dotenv.config();
 
 const app = express();
 const port = 3000; //Port number
@@ -34,7 +37,7 @@ db.connect();
 
 //------- Session Settings -------//
 const store = new MongoDBSession({
-    uri : 'mongodb+srv://DrNA:ZJ6asv39qYy63sEn@cluster0.jpvzthk.mongodb.net/?retryWrites=true&w=majority',
+    uri : process.env.ONLINE_URL,
     collection: 'Sessions'
 });
 
