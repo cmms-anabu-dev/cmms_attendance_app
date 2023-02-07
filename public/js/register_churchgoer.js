@@ -1,5 +1,3 @@
-//const csv_to_json = require("./csv_to_json.js")
-
 document.addEventListener("DOMContentLoaded", function (event) {
 	$("#phonenum").keyup(function () {
         var input = this;
@@ -47,30 +45,19 @@ document.addEventListener("DOMContentLoaded", function (event) {
 		var baptism= document.querySelector("#baptismstatus");
 		var baptismlocation = document.querySelector("#baptismallocation");
 		var baptismdate = document.querySelector("#baptismaldate");
-		var password1 = document.querySelector("#password1");
-		var password2 = document.querySelector("#password2");
 		var today = new Date();
-		var churchstatus = "For Admin Review";
 
 		if (phonenum.value == "" || firstname.value == "" || lastname.value == "" || birthdate.value == "" || address.value == "" || gender.value == "" || baptism.value == "Select Baptism Status" /*|| password1.value == "" || password2.value == ""*/) {
 			document.querySelector("#errorText").innerHTML = "";
 			document.querySelector("#errorText").innerHTML += "Fill up all fields.";
-			console.log("error");
 		}
 		else if (baptism.value != "Unbaptized" && (baptismlocation.value == "" || baptismdate.value == "")) {
 			document.querySelector("#errorText").innerHTML = "";
 			document.querySelector("#errorText").innerHTML += "Fill up all fields.";
-			console.log("error");
 		}
-		/*else if (password2.value != password1.value) {
-			document.querySelector("#errorText").innerHTML = "";
-			document.querySelector("#errorText").innerHTML += "Passwords don't match.";
-			console.log("error");
-		}*/
 		else if (baptism.value == "Unbaptized" && (baptismlocation.value != "" || baptismdate.value != "")) {
 			document.querySelector("#errorText").innerHTML = "";
 			document.querySelector("#errorText").innerHTML += "Unbaptized, therefore baptism location and date should not exist.";
-			console.log("error");
 		}
 		else if (baptism.value != "Unbaptized" && ((new Date(birthdate.value) > today && new Date(baptismdate.value) > today) || new Date(birthdate.value) > new Date(baptismdate.value))){
 			document.querySelector("#errorText").innerHTML = "";
@@ -109,14 +96,12 @@ document.addEventListener("DOMContentLoaded", function (event) {
 			
             var form = document.getElementById("register-churchgoer");
             form.reset();
-			// window.location.href = `/register-churchgoer`; 
         }
     });
 	
 	$("#submit-bulk").click(function() {
 		var fileList = document.querySelector("#csv").files;
 		if (fileList.length==0){
-			console.log("Please choose a file");
 			alert("Please choose a file");
 		}
 		else{
@@ -153,25 +138,31 @@ document.addEventListener("DOMContentLoaded", function (event) {
 								jsonData.push(rowData);
 							}
 						}
-						//console.log(jsonData);
-						var docs =  JSON.stringify(jsonData, null, 0);
-						console.log("/addMultipleCG?docs=" + docs);
+
 						$.ajax({
 							url: "/addMultipleCG",
 							type: "POST",
 							data: JSON.stringify(jsonData, null, 0),
 							processData: true,
 							contentType: "application/json; charset=UTF-8",
+						}).done((result) => {
+							if(result) {
+								var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+								var toastList = toastElList.map(function(toastEl) {
+									return new bootstrap.Toast(toastEl)
+								});
+
+								toastList.forEach(toast => toast.show());
+							} else
+								alert('Bulk Register Error! Please try again.');
 						});
 					}
 				}
 				catch(e){
-					console.log("done catch");
 					console.error(e);
 				}
 			}
 			else{
-				console.log("Please choose a valid csv file");
 				alert("Please choose a valid csv file");
 			}
 		}

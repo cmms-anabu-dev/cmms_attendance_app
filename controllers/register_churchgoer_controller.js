@@ -25,7 +25,7 @@ const register_churchgoer_controller = {
 
     addMultiple: function(req, res) {
         db.insertMany(User, req.body, (result) =>{
-            console.log(result);
+            res.send(result);
         });
     },
 

@@ -17,7 +17,7 @@ const register_admin_controller = {
 
     addMultiple: function(req, res) {
         db.insertMany(Admin, req.body, (result) =>{
-            console.log(result);
+            res.send(result);
         });
     }
 };

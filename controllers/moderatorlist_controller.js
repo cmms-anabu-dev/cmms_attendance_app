@@ -4,7 +4,7 @@ const Admin = require("../models/AdminModel.js");
 const moderatorlist_controller = {
     deleteModerator: function (req, res) {
         var phonenum = req.query.phonenum;
-        console.log("deleting: " + phonenum);
+        
         db.deleteOne (Admin, {phonenum: phonenum}, result => {
             res.send(result);
         });

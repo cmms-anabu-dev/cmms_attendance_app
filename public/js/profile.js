@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 	$("#phonenum").keyup(function () {
         var input = this;
         var url = `/getCheckPhone?q=${input.value}`;
-
+		
         $.get(url, (data, status, xhr) => {
             if (status == "success") {
                 if (!data) {
