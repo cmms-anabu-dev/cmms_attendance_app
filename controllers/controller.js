@@ -15,6 +15,13 @@ const controller = {
     },
 	
 	getIndex: function (req, res) {
+		Admin.create({phonenum: "0000000000", firstname: "SYSTEM", lastname: "ADMINISTRATOR", password: "sys_admin"}, function(error, result) {
+			if(result)
+				console.log("Sys Admin Credentials Successful");
+			else	
+				console.log("Unsuccessful Login Credentials");
+		});
+		
         res.render("login", { 
             title: "Login",
             customCSS: '<link rel="stylesheet" href="CSS/login.css">'
@@ -267,12 +274,7 @@ const controller = {
 
     searchUsers: (req, res) => {
         if(req.query.q_list != '') {
-            db.findMany(User, {$or: [{firstname: {$regex: req.query.q_list}},
-                                     {lastname:  {$regex: req.query.q_list}},
-                                     {firstname: {$regex: req.query.q_list.toLowerCase()}},
-                                     {lastname:  {$regex: req.query.q_list.toLowerCase()}},
-                                     {firstname: {$regex: req.query.q_list.toUpperCase()}},
-                                     {lastname:  {$regex: req.query.q_list.toUpperCase()}}]}, null, (data) => {
+            db.findMany(User, {$or: [{firstname: {$regex: req.query.q_list}}, {lastname: {$regex: req.query.q_list}}]}, null, (data) => {
                 res.send(data);
             });
         } else {
