@@ -1,7 +1,6 @@
 //Declaring dependencies
 const http = require('http');
 const path = require('path');
-const dotenv = require('dotenv');
 const express = require('express');
 const favicon = require('express-favicon');
 const exphbs = require('express-handlebars');
@@ -11,7 +10,7 @@ const bodyParser = require('body-parser');
 const MongoDBSession = require('connect-mongodb-session')(session);
 const routes = require('./routes/routes.js');
 const db = require('./models/db.js');
-
+const dotenv = require('dotenv');
 dotenv.config();
 
 const app = express();

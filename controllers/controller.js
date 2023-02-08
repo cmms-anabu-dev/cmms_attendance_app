@@ -267,7 +267,12 @@ const controller = {
 
     searchUsers: (req, res) => {
         if(req.query.q_list != '') {
-            db.findMany(User, {$or: [{firstname: {$regex: req.query.q_list}}, {lastname: {$regex: req.query.q_list}}]}, null, (data) => {
+            db.findMany(User, {$or: [{firstname: {$regex: req.query.q_list}},
+                                     {lastname:  {$regex: req.query.q_list}},
+                                     {firstname: {$regex: req.query.q_list.toLowerCase()}},
+                                     {lastname:  {$regex: req.query.q_list.toLowerCase()}},
+                                     {firstname: {$regex: req.query.q_list.toUpperCase()}},
+                                     {lastname:  {$regex: req.query.q_list.toUpperCase()}}]}, null, (data) => {
                 res.send(data);
             });
         } else {
