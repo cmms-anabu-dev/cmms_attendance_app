@@ -330,8 +330,8 @@ const controller = {
                         });
                     }
                     db.countDocuments(Attendance, {date: date, session: req.query.session}, (count) => {
-                        console.log(tempArray);
-                        console.log(count);
+                        //console.log(tempArray);
+                        //console.log(count);
                         res.render("session", { navigation: nav, ymddate: dateString, session: req.query.session, data: tempArray, count });
                     });
                 });
@@ -348,8 +348,8 @@ const controller = {
                         });
                     }
                     db.countDocuments(Attendance, {date: date, session: req.query.session}, (count) => {
-                        console.log(tempArray);
-                        console.log(count);
+                        //console.log(tempArray);
+                        //console.log(count);
                         res.render("session", { navigation: nav, ymddate: dateString, session: req.query.session, data: tempArray, count });
                     });
                 });

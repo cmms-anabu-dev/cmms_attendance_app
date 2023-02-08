@@ -15,7 +15,6 @@ const sessions_controller = {
             if (!data) {
                 db.insertOne(Session, {date: today, session: session}, (data2) => {
                     console.log("Session Added");
-                    console.log(data2);
                 });
             }
         });
@@ -24,13 +23,13 @@ const sessions_controller = {
     deleteSession: function (req, res) {
         var session = req.query.session;
         var date = new Date(req.query.date);
-        db.deleteOne (Session, {date: date, session: session}, result => {
+        db.deleteOne (Session, {date: date, session: session}, (result) => {
             if (result)
-                console.log("deleted");
+                console.log("Delete Session Successful");
             else
-                console.log("fail");
+                console.log("Delete Session Unsuccessful");
         });
-        db.deleteMany (Attendance, {date: date, session: session}, result =>{
+        db.deleteMany (Attendance, {date: date, session: session}, (result) =>{
             console.log("deleted");
         });
         res.redirect("/sessions");
