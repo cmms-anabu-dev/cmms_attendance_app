@@ -99,9 +99,9 @@
                                 </th>
                             </tr>
                         </thead>
-                        <div id="sessions">
+						<div id="sessions">
                             {{#each data}}
-								{{> sessionRepoTable date=date session=session}}
+								{{> sessionRepoTable ymddate=ymddate session=session}}
 							{{/each}}
                         </div>
                     </table>

@@ -103,27 +103,23 @@ const controller = {
             res.redirect("/login");
         } else {
             if (req.query.session == null){
-                db.findMany(Session, {}, {_id: 0, ymddate: { $dateToString: {date: "$date", format: "%Y-%m-%d" }}, session: 1}, (data) => {
+                db.findMany(Session, {}, {ymddate: { $dateToString: {date: "$date", format: "%Y-%m-%d" }}, session: "$session"}, (data) => {
                     const tempArray = [];
                     if (data.length !== 0){
-                        data.forEach(doc => tempArray.push(doc.toObject()));
+						data.forEach(doc => tempArray.push(doc.toObject()));
                     }
-                    db.countDocuments(Session, {}, (count) => {
-                        res.render("sessions_repo", { data: tempArray, count });
-                    }); 
+					console.log(data);
+					res.render("sessions_repo", {data: tempArray});
                 });
             }
             else{
                 db.findMany(Session, {session: req.query.session}, {_id: 0, ymddate: { $dateToString: {date: "$date", format: "%Y-%m-%d" }}, session: 1}, (data) => {
                     const tempArray = [];
                     if (data.length !== 0){
-                        data.forEach(doc => tempArray.push(doc.toObject()));
+						data.forEach(doc => tempArray.push(doc.toObject()));
                     }
-                    db.countDocuments(Session, {session: req.query.session}, (count) => {
-                        //console.log(tempArray);
-                        //console.log(count);
-                        res.render("sessions_repo", { data: tempArray, count });
-                    }); 
+					console.log(data);
+                    res.render("sessions_repo", {data: data});
                 });
             }
         }
@@ -317,28 +313,22 @@ const controller = {
             var spanDate = "<span id=\"nav_date\">" + fullDateString + "</span>";
             var spanSession = "<span id=\"nav_session\">" + req.query.session + "</span>";
             var nav = "<p id=\"navigation\"><a href=\"/sessions\">All Sessions</a> / " + spanDate + " - " + spanSession + "</p>"
-
+			console.log("Load Session Attendance - A");
             if (req.query.baptism == null){
                 db.findMany(Attendance, {date: date, session: req.query.session}, {}, (data) => {
                     const tempArray = [];
                     if (data.length !== 0){
-                        data.forEach((doc) => {
-                            var logtime  = doc.logtime.getHours().toString() + ':' + doc.logtime.getMinutes().toString() + ':' + doc.logtime.getSeconds().toString();
-
-                            tempArray.push(doc.toObject());
-                            tempArray[tempArray.length - 1].logtime = logtime;
-                        });
+						data.forEach(doc => tempArray.push(doc.toObject()));
                     }
-                    db.countDocuments(Attendance, {date: date, session: req.query.session}, (count) => {
-                        //console.log(tempArray);
-                        //console.log(count);
-                        res.render("session", { navigation: nav, ymddate: dateString, session: req.query.session, data: tempArray, count });
-                    });
+					console.log(tempArray);
+                    res.render("session", { navigation: nav, ymddate: dateString, session: req.query.session, data: tempArray});
                 });
             }
             else {
                 db.findMany(Attendance, {date: date, session: req.query.session, baptism: req.query.baptism}, {}, (data) => {
-                    const tempArray = [];
+                    /* {ymddate: { $dateToString: {date: "$date", format: "%Y-%m-%d" }}, session: "$session"} */
+					// {}
+					const tempArray = [];
                     if (data.length !== 0) {
                         data.forEach((doc) => {
                             var logtime  = doc.logtime.getHours().toString() + ':' + doc.logtime.getMinutes().toString() + ':' + doc.logtime.getSeconds().toString();
@@ -348,10 +338,12 @@ const controller = {
                         });
                     }
                     db.countDocuments(Attendance, {date: date, session: req.query.session}, (count) => {
-                        //console.log(tempArray);
-                        //console.log(count);
+                        console.log(tempArray);
+                        console.log(count);
                         res.render("session", { navigation: nav, ymddate: dateString, session: req.query.session, data: tempArray, count });
                     });
+					
+					console.log("Load Session Attendance - C");
                 });
             }
         }
