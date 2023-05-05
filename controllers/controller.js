@@ -315,7 +315,7 @@ const controller = {
             var nav = "<p id=\"navigation\"><a href=\"/sessions\">All Sessions</a> / " + spanDate + " - " + spanSession + "</p>"
 			console.log("Load Session Attendance - A");
             if (req.query.baptism == null){
-                db.findMany(Attendance, {date: req.query.date, session: req.query.session}, {}, (data) => {
+                db.findMany(Attendance, {date: req.query.date, session: req.query.session}, null, (data) => {
                     var tempArray = [];
                     console.log(data);
                     console.log("-----");
