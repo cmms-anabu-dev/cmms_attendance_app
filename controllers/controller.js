@@ -293,29 +293,29 @@ const controller = {
             res.redirect("/login");
         }
         else{    
-            var date = new Date(req.query.date);
+            var sDate = new Date(req.query.date);
             var dateString;
-            if (date.getMonth() < 9 && date.getDate() < 10){
-                dateString = date.getFullYear() + "-0" + (date.getMonth() + 1) + "-0" + date.getDate();
+            if (sDate.getMonth() < 9 && sDate.getDate() < 10){
+                dateString = sDate.getFullYear() + "-0" + (sDate.getMonth() + 1) + "-0" + sDate.getDate();
             }
-            else if (date.getMonth() < 9 && date.getDate() > 10){
-                dateString = date.getFullYear() + "-0" + (date.getMonth() + 1) + "-" + date.getDate();
+            else if (sDate.getMonth() < 9 && sDate.getDate() > 10){
+                dateString = sDate.getFullYear() + "-0" + (sDate.getMonth() + 1) + "-" + sDate.getDate();
             }
-            else if (date.getMonth() > 9 && date.getDate() < 10){
-                dateString = date.getFullYear() + "-" + (date.getMonth() + 1) + "-0" + date.getDate();
+            else if (sDate.getMonth() > 9 && sDate.getDate() < 10){
+                dateString = sDate.getFullYear() + "-" + (sDate.getMonth() + 1) + "-0" + sDate.getDate();
             }
             else{
-                dateString = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+                dateString = sDate.getFullYear() + "-" + (sDate.getMonth() + 1) + "-" + sDate.getDate();
             }
             const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-            var fullDateString = date.getFullYear() + ", " + monthNames[date.getMonth()] + " " + date.getDate(); 
+            var fullDateString = sDate.getFullYear() + ", " + monthNames[sDate.getMonth()] + " " + sDate.getDate(); 
             
             var spanDate = "<span id=\"nav_date\">" + fullDateString + "</span>";
             var spanSession = "<span id=\"nav_session\">" + req.query.session + "</span>";
             var nav = "<p id=\"navigation\"><a href=\"/sessions\">All Sessions</a> / " + spanDate + " - " + spanSession + "</p>"
 			console.log("Load Session Attendance - A");
             if (req.query.baptism == null){
-                db.findMany(Attendance, {date: req.query.date, session: req.query.session}, null, (data) => {
+                db.findMany(Attendance, {date: sDate, session: req.query.session}, null, (data) => {
                     var tempArray = [];
                     console.log(data);
                     console.log("-----");
@@ -326,7 +326,7 @@ const controller = {
                 });
             }
             else {
-                db.findMany(Attendance, {date: date, session: req.query.session, baptism: req.query.baptism}, {}, (data) => {
+                db.findMany(Attendance, {date: sDate, session: req.query.session, baptism: req.query.baptism}, {}, (data) => {
                     /* {ymddate: { $dateToString: {date: "$date", format: "%Y-%m-%d" }}, session: "$session"} */
 					// {}
 					var tempArray = [];
