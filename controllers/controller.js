@@ -293,6 +293,7 @@ const controller = {
             res.redirect("/login");
         }
         else{    
+            console.log(req.query.date);
             var date = new Date(req.query.date);
             var dateString;
             if (date.getMonth() < 9 && date.getDate() < 10){
@@ -315,6 +316,9 @@ const controller = {
             var nav = "<p id=\"navigation\"><a href=\"/sessions\">All Sessions</a> / " + spanDate + " - " + spanSession + "</p>"
 			console.log("Load Session Attendance - A");
             if (req.query.baptism == null){
+                console.log(date);
+                console.log(req.query.session);
+
                 db.findMany(Attendance, {date: date, session: req.query.session}, {}, (data) => {
                     var tempArray = [];
                     console.log(data);
