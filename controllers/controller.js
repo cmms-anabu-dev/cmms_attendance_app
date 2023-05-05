@@ -289,67 +289,60 @@ const controller = {
      * @param {*} response to the client 
      */
     loadSessionAttendance: (req, res) =>{
-        if(loggedin == false && phonenum == null) {
+        if(loggedin && phonenum == null)
             res.redirect("/login");
-        }
-        else{    
+        else {
             var sDate = new Date(req.query.date);
             var dateString;
-            if (sDate.getMonth() < 9 && sDate.getDate() < 10){
-                dateString = sDate.getFullYear() + "-0" + (sDate.getMonth() + 1) + "-0" + sDate.getDate();
-            }
-            else if (sDate.getMonth() < 9 && sDate.getDate() > 10){
-                dateString = sDate.getFullYear() + "-0" + (sDate.getMonth() + 1) + "-" + sDate.getDate();
-            }
-            else if (sDate.getMonth() > 9 && sDate.getDate() < 10){
-                dateString = sDate.getFullYear() + "-" + (sDate.getMonth() + 1) + "-0" + sDate.getDate();
-            }
-            else{
-                dateString = sDate.getFullYear() + "-" + (sDate.getMonth() + 1) + "-" + sDate.getDate();
-            }
-            const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-            var fullDateString = sDate.getFullYear() + ", " + monthNames[sDate.getMonth()] + " " + sDate.getDate(); 
+            var fMonth, fDay, fYear;
+
+            const months = ["January","February","March",
+                            "April","May","June",
+                            "July","August","September",
+                            "October","November","December"];
+            var fullDateString;
+            var spanDate;
+            var spanSession;
+            var nav;
+
+            // [1] Seesion Date String
+            fMonth = sDate.getMonth() + 1;
+            if(fMonth < 10)
+                fMonth = "0" + fMonth.toString();
             
-            var spanDate = "<span id=\"nav_date\">" + fullDateString + "</span>";
-            var spanSession = "<span id=\"nav_session\">" + req.query.session + "</span>";
-            var nav = "<p id=\"navigation\"><a href=\"/sessions\">All Sessions</a> / " + spanDate + " - " + spanSession + "</p>"
-			console.log("Load Session Attendance - A");
-            if (req.query.baptism == null){
-                db.findMany(Attendance, {date: req.query.date, session: req.query.session}, null, (data) => {
-                    console.log("REQ.QUERY.DATE: \n");
-                    console.log(data);
-                });
+            fDay = sDate.getDate();
+            if(fDay < 10)
+                fDay = "0" + fDay.toString();
+            
+            fYear = sDate.getFullYear();
+            dateString = fYear + "-" + fMonth + "-" + fDay;
 
-                db.findMany(Attendance, {date: sDate, session: req.query.session}, null, (data) => {
-                    const tempArray = [];
-                    console.log("SDATE: \n");
+            // [2] Span Date String
+            fullDateString = fYear + ", " + months[fMonth - 1] + " " + sDate.getDate();
+            spanDate = "<span id=\"nav_date\">" + fullDateString + "</span>";
+            spanSession = "<span id=\"nav_session\">" + req.query.session + "</span>";
+            nav = "<p id=\"navigation\"><a href=\"/sessions\">All Sessions</a> / " + spanDate + " - " + spanSession + "</p>"
+			
+            // [3] Get the Data
+            console.log("[3]");
+            if(req.query.baptism === null)
+                db.findMany(Attendance, {date: sDate, session: req.query.session}, {}, (data) => {
+                    const tempArr = [];
                     console.log(data);
-                    if(data.length !== 0) {
-					    data.forEach(doc => tempArray.push(doc.toObject()));
-                    }
-					console.log(tempArray);
-                    res.render("session", { navigation: nav, ymddate: dateString, session: req.query.session, data: tempArray});
+                    if(data.length !== 0)
+                        data.forEach((doc) => {tempArr.push(doc.toObject())});
+                    
+                    res.render("session", {navigation: nav, ymddate: dateString, session: req.query.session, data: tempArr});
                 });
-            }
-            else {
-                db.findMany(Attendance, {date: sDate, session: req.query.session, baptism: req.query.baptism}, {}, (data) => {
-                    /* {ymddate: { $dateToString: {date: "$date", format: "%Y-%m-%d" }}, session: "$session"} */
-					// {}
-					var tempArray = [];
-                    if (data.length != 0) {
-                        data.forEach((doc) => {
-                            var logtime  = doc.logtime.getHours().toString() + ':' + doc.logtime.getMinutes().toString() + ':' + doc.logtime.getSeconds().toString();
-
-                            tempArray.push(doc.toObject());
-                            tempArray[tempArray.length - 1].logtime = logtime;
-                        });
-                    }
-                    console.log(tempArray);
-                    res.render("session", { navigation: nav, ymddate: dateString, session: req.query.session, data: tempArray});
-					
-					console.log("Load Session Attendance - C");
+            else
+                db.findMany(Attendance, {date: sDate, session: req.query.session}, {}, (data) => {
+                    const tempArr = [];
+                    console.log(data);
+                    if(data.length !== 0)
+                        data.forEach((doc) => {tempArr.push(doc.toObject())});
+                    
+                    res.render("session", {navigation: nav, ymddate: dateString, session: req.query.session, data: tempArr});
                 });
-            }
         }
     },
 
