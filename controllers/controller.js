@@ -317,9 +317,10 @@ const controller = {
             if (req.query.baptism == null){
                 db.findMany(Attendance, {date: date, session: req.query.session}, {}, (data) => {
                     var tempArray = [];
-                    if (data.length !== 0){
-						data.forEach(doc => tempArray.push(doc.toObject()));
-                    }
+                    console.log(data);
+                    console.log("-----");
+					data.forEach(doc => tempArray.push(doc.toObject()));
+                    
 					console.log(tempArray);
                     res.render("session", { navigation: nav, ymddate: dateString, session: req.query.session, data: tempArray});
                 });
@@ -329,7 +330,7 @@ const controller = {
                     /* {ymddate: { $dateToString: {date: "$date", format: "%Y-%m-%d" }}, session: "$session"} */
 					// {}
 					var tempArray = [];
-                    if (data.length !== 0) {
+                    if (data.length != 0) {
                         data.forEach((doc) => {
                             var logtime  = doc.logtime.getHours().toString() + ':' + doc.logtime.getMinutes().toString() + ':' + doc.logtime.getSeconds().toString();
 
