@@ -325,6 +325,8 @@ const controller = {
 			
             // [3] Get the Data
             console.log("[3]");
+            console.log(req.query.date);
+            console.log(sDate);
             if(req.query.baptism === null)
                 db.findMany(Attendance, {date: sDate, session: req.query.session}, {}, (data) => {
                     const tempArr = [];
