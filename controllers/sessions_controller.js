@@ -9,7 +9,7 @@ const sessions_controller = {
         var day = temptoday.getDate();
         var year = temptoday.getFullYear();
         var session = req.query.session;
-        var today = new Date(year, month, day, +8, 0, 0);
+        var today = new Date(year, month, day, 0, 0, 0);
         
         db.findOne(Session, {date: today, session: session}, null, (data) => {
             if (!data) {
