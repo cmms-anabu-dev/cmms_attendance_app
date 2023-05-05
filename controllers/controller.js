@@ -315,12 +315,18 @@ const controller = {
             var nav = "<p id=\"navigation\"><a href=\"/sessions\">All Sessions</a> / " + spanDate + " - " + spanSession + "</p>"
 			console.log("Load Session Attendance - A");
             if (req.query.baptism == null){
-                db.findMany(Attendance, {date: sDate, session: req.query.session}, null, (data) => {
-                    var tempArray = [];
+                db.findMany(Attendance, {date: req.query.date, session: req.query.session}, null, (data) => {
+                    console.log("REQ.QUERY.DATE: \n");
                     console.log(data);
-                    console.log("-----");
-					data.forEach(doc => tempArray.push(doc.toObject()));
-                    
+                });
+
+                db.findMany(Attendance, {date: sDate, session: req.query.session}, null, (data) => {
+                    const tempArray = [];
+                    console.log("SDATE: \n");
+                    console.log(data);
+                    if(data.length !== 0) {
+					    data.forEach(doc => tempArray.push(doc.toObject()));
+                    }
 					console.log(tempArray);
                     res.render("session", { navigation: nav, ymddate: dateString, session: req.query.session, data: tempArray});
                 });
