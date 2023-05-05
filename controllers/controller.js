@@ -292,7 +292,11 @@ const controller = {
         if(loggedin && phonenum == null)
             res.redirect("/login");
         else {
-            var sDate = new Date(req.query.date);
+            var tempDate = new Date(req.query.date);
+            var m;
+            var d;
+            var y;
+            var sDate;
             var dateString;
             var fMonth, fDay, fYear;
 
@@ -304,6 +308,12 @@ const controller = {
             var spanDate;
             var spanSession;
             var nav;
+
+            // [0] Set Date Properly to GMT+8
+            m = tempDate.getMonth();
+            d = tempDate.getDate();
+            y = tempDate.getFullYear();
+            sDate = new Date (y, m, d, +8, 0, 0);
 
             // [1] Seesion Date String
             fMonth = sDate.getMonth() + 1;
