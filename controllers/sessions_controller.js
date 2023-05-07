@@ -22,7 +22,11 @@ const sessions_controller = {
 
     deleteSession: function (req, res) {
         var session = req.query.session;
-        var date = new Date(req.query.date);
+        var dateArr = req.query.date.split('-');
+        var year = dateArr[0];
+        var month = dateArr[1] - 1;
+        var day = dateArr[2];
+        var date = new Date(year, month, day, +8, 0, 0);
         
         db.deleteOne (Session, {date: date, session: session}, (result) => {
             if (result)
