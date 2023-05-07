@@ -345,19 +345,22 @@ const controller = {
                             tempData['session'] = req.query.session;
                             tempArr.push(tempData);
                         });
-                        console.log("Data For Each done");
+                        console.log("Data For Each Null  done");
                     }
-
-                    console.log(tempArr);
                     res.render("session", {navigation: nav, ymddate: dateString, session: req.query.session, data: tempArr});
                 });
             } else {
-                console.log("Not Null Baptism");
-                db.findMany(Attendance, {date: sDate, session: req.query.session}, {}, (data) => {
+                db.findMany(Attendance, {date: sDate, session: req.query.session, baptism: req.query.baptism}, {}, (data) => {
                     const tempArr = [];
-                    console.log(typeof(data));
-                    if(data.length !== 0) {
-                        data.forEach(doc => tempArr.push(doc.toObject()));
+                    var tempData;
+                    if(data) {
+                        data.forEach((doc) => {
+                            tempData = doc.toObject();
+                            tempData['ymddate'] = dateString;
+                            tempData['session'] = req.query.session;
+                            tempArr.push(tempData);
+                        });
+                        console.log("Data For Each Not Null  done");
                     }
                     res.render("session", {navigation: nav, ymddate: dateString, session: req.query.session, data: tempArr});
                 });
