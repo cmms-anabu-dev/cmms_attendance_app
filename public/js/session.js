@@ -23,8 +23,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     
     $("#generate-report").click(function () {
-        var iso_start_date = $('#start_date').val() + "T00:00:00.000Z";
-        var iso_end_date = $('#end_date').val() + "T00:00:00.000Z";
+        var iso_start_date = $('#start_date').val() + "T08:00:00.000Z";
+        var iso_end_date = $('#end_date').val() + "T08:00:00.000Z";
         var session = $("input[name='opt_session']:checked").val();
 
         $.get('generateReport', {start_date: iso_start_date, end_date: iso_end_date, q_ses: session}, function (result) {

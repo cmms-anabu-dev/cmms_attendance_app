@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             day = "0" + day;
         
         // YYYY-MM-DDTHH:mm:ss.sssZ
-        var iso_start_date = year + "-" + month + "-" + day + "T" + "00:00:00.000Z";
+        var iso_start_date = year + "-" + month + "-" + day + "T" + "08:00:00.000Z";
         
         $.get('generateAttendence', {start_date: iso_start_date, q_ses: str_session}, function (result) {
             var headers = {
