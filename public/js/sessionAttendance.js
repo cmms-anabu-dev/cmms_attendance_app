@@ -5,13 +5,14 @@ document.addEventListener("DOMContentLoaded", function (event) {
         var session = this.dataset.session;
         var phonenum = this.dataset.phonenum;
         var url = '/deleteAttendance?date='+date+'&session='+session+"&phonenum="+phonenum;
+
         $.get(url, (data, status, xhr) => {
             // alert(status);
             if (status == "success") {
                 window.location.href = "/sessionAttendance?date=" + date + "&session=" + session;
             }
             else {
-                var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+                var toastElList = [].slice.call(document.querySelectorAll('.toast'));
                 var toastList = toastElList.map(function(toastEl) {
                     return new bootstrap.Toast(toastEl)
                 });
@@ -47,9 +48,12 @@ document.addEventListener("DOMContentLoaded", function (event) {
         var month = months[str_date[1]];
         var day = str_date[2];
 
+        if(parseInt(day) < 10)
+            day = "0" + day;
+        
         // YYYY-MM-DDTHH:mm:ss.sssZ
         var iso_start_date = year + "-" + month + "-" + day + "T" + "00:00:00.000Z";
-
+        
         $.get('generateAttendence', {start_date: iso_start_date, q_ses: str_session}, function (result) {
             var headers = {
                 session: 'Sessions', 
@@ -74,8 +78,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
                     logtime: item.logtime
                 });
             });
-    
-            var fileTitle = 'Attendance'; 
+
+            var fileTitle = 'attendance_' + year + "-" + month + "-" + day + "_" + str_session; 
     
             exportCSVFile(headers, itemsFormatted, fileTitle);
         });

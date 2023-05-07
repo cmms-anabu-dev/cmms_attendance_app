@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         var date = this.dataset.date;
         var session = this.dataset.session;
         var url = '/deleteSession?date='+date+'&session='+session;
+       
         $.get(url, (data, status, xhr) => {
             // alert(status);
             if (status == "success") {
@@ -20,12 +21,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
         });
     });
 
-    // $('#report_modal').click(() => {
-    //     var today = new Date();
-    //     var today_format = today.getFullYear() + '-' + (today.getMonth() + 1).toString().padStart(2, 0)  + '-' + today.getDate().toString().padStart(2, 0) ;
-    //     $('#start_date').val(today_format);
-    //     $('#end_date').val(today_format);
-    // });
     
     $("#generate-report").click(function () {
         var iso_start_date = $('#start_date').val() + "T00:00:00.000Z";
@@ -58,7 +53,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 });
             });
     
-            var fileTitle = 'Report'; 
+            var fileTitle = 'Report' + "_" + $('#start_date').val() + "_" + $('#end_date').val() + session;
+            
     
             exportCSVFile(headers, itemsFormatted, fileTitle);
         });

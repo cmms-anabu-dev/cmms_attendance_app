@@ -25,8 +25,8 @@ const attendance_controller = {
 
     deleteAttendance: function(req, res) {
         var date = new Date(req.query.date);
-        db.deleteOne(Attendance, {date: date, session: req.query.session, phonenum: req.query.phonenum}, result =>{
-            
+        db.deleteOne(Attendance, {date: date, session: req.query.session, phonenum: req.query.phonenum}, (result) =>{
+            console.log("RESULT: ", result);
             var url = "/sessionAttendance?date=" + req.query.date + "&session=" + req.query.session
             res.redirect(url);
         });
@@ -52,8 +52,10 @@ const attendance_controller = {
 
     generateAttendence: function(req, res) {
         var start_date = new Date(req.query.start_date);        
-
+        //var start_date = req.query.start_date;\
+        console.log(req.query.start_date);
         db.findMany(Attendance, {date: start_date, session: req.query.q_ses}, null, (data) => {
+            console.log(data);
             res.send(data);
         });
     },

@@ -11,10 +11,14 @@ const moderatorlist_controller = {
         //res.redirect("/load_moderators");
     },
     updateOne: function(req, res) {
-        console.log(req.query.origphonenum);
-        db.updateOne(Admin, {phonenum:req.query.origphonenum}, {$set: {phonenum: req.query.phonenum, lastname: req.query.lastname, firstname: req.query.firstname, password: req.query.password}},(result =>{
-            res.send(result);
-        }));
+        if(req.query.password != "")
+            db.updateOne(Admin, {phonenum:req.query.origphonenum}, {$set: {phonenum: req.query.phonenum, lastname: req.query.lastname, firstname: req.query.firstname, password: req.query.password}},(result) => {
+                res.send(result);
+            });
+        else
+            db.updateOne(Admin, {phonenum:req.query.origphonenum}, {$set: {phonenum: req.query.phonenum, lastname: req.query.lastname, firstname: req.query.firstname}},(result) => {
+                res.send(result);
+            });
     }
 };
 

@@ -54,30 +54,35 @@ document.addEventListener("DOMContentLoaded", function (event) {
         var phonenum = $("#phonenum").val()
         var lastname = $("#lastname").val();
         var firstname = $("#firstname").val();
-        var password1 = $("#new-password").val();
-        var password2 = $("#confirm-new-password").val();
-        console.log("Old PN:\n" + origphonenum);
-        console.log("New:\n" + phonenum + "\n" + lastname + "\n" + firstname + "\n" + password1 + "\n" + password2);
-        if (phonenum == "" || lastname == "" || firstname == "" || password1 == "" || password2 == ""){
-            document.querySelector("#password-error").innerHTML = "";
-			document.querySelector("#password-error").innerHTML += "Fill up all fields.";
-        }
-        else if (password1 != password2){
-            document.querySelector("#password-error").innerHTML = "";
-			document.querySelector("#password-error").innerHTML += "The passwords don't seem to match. Type it again?";
-        }
-        else{
-            document.querySelector("#password-error").innerHTML = "";
-            $.get('updateModerator', {origphonenum: origphonenum, phonenum: phonenum, lastname:lastname, firstname:firstname, password:password1}, function (result) {
-				console.log(result);
-				if (result){
-					alert(lastname + ", " + firstname + "'s Data is successfuly updated");
-					window.location.href ="/load_moderators";
-				}
-				else{
-					alert("There is an error in updating " + lastname + ", " + firstname + "'s data");
-				}
-			});
+        var newPassword = $("#new-password").val();
+        var confirmnewPassword = $("#confirm-new-password").val();
+
+        if (phonenum == "" || lastname == "" || firstname == "" || (newPassword != "" && confirmnewPassword == "") || (newPassword == "" && confirmnewPassword != "")){
+			$("#message-error").text("Please fill up all fields.");
+        } else if (newPassword != confirmnewPassword) {
+			$("#message-error").text("The passwords do not match. Please try again.");
+        } else {
+            $("#message-error").text("");
+            $.get('updateModerator', {origphonenum: origphonenum, phonenum: phonenum, lastname:lastname, firstname:firstname, password:newPassword}, function (result) {
+            if (result) {
+                var toastElList = [].slice.call(document.querySelectorAll('.toast.bg-success'))
+				var toastList = toastElList.map(function(toastEl) {
+					return new bootstrap.Toast(toastEl)
+				});
+				toastList.forEach(toast => toast.show());
+
+                console.log("result updated");
+                // window.location.href ="/load_moderators";
+            } else {
+                var toastElList = [].slice.call(document.querySelectorAll('.toast.bg-danger'))
+				var toastList = toastElList.map(function(toastEl) {
+					return new bootstrap.Toast(toastEl)
+				});
+				toastList.forEach(toast => toast.show());
+
+                console.log("result not updated");
+            }
+            });
         }
     });
 	
