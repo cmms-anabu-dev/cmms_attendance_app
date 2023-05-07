@@ -4,9 +4,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
         var date = this.dataset.date;
         var session = this.dataset.session;
         var url = '/deleteSession?date='+date+'&session='+session;
-       
+       console.log(date, session, url);
         $.get(url, (data, status, xhr) => {
             // alert(status);
+            console.log(status);
             if (status == "success") {
                 window.location.href = "/sessions";
             }

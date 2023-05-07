@@ -5,9 +5,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
         var session = this.dataset.session;
         var phonenum = this.dataset.phonenum;
         var url = '/deleteAttendance?date='+date+'&session='+session+"&phonenum="+phonenum;
-
+        console.log(date, session, phonenum, url);
         $.get(url, (data, status, xhr) => {
             // alert(status);
+            console.log(status);
             if (status == "success") {
                 window.location.href = "/sessionAttendance?date=" + date + "&session=" + session;
             }
